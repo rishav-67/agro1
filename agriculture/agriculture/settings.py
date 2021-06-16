@@ -25,9 +25,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = '%%0_bww0#iuo6%p9!4s6p#$xbb-%myk7s+c9qr=p6(=zsjf%fh'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ['*','127.0.0.1']
+ALLOWED_HOSTS = ['*','127.0.0.1','agro-production.herokuapp.com']
 
 
 # Application definition
@@ -72,7 +72,7 @@ TEMPLATES = [
         },
     },
 ]
-
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 WSGI_APPLICATION = 'agriculture.wsgi.application'
 
 
@@ -127,4 +127,6 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS=[
     os.path.join(BASE_DIR,'static')
 ]
-STATIC_ROOT = os.path.join(BASE_DIR, 'static') 
+STATIC_ROOT = os.path.join(BASE_DIR,'static') 
+MEDIA_URL= '/media/'
+MEDIA_ROOT=BASE_DIR / 'media'
