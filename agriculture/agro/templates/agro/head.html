@@ -1,0 +1,37 @@
+{% extends 'agro/base.html' %}
+{% load static %}
+{% block content %}
+<div class="container">
+  <h2 class="text-center" style="font-family:georgia,garamond,serif;font-size:30px;font-style:italic;color:white"><u>SOME RANDOM SAMPLES PER STATES</u></h2><br>            
+  <table class="table table-dark table-striped" id='myTable'>
+    <thead>
+      <tr>  
+        <th>State_Name</th>
+        <th>District_Name</th>
+        <th>Crop_year</th>
+        <th>Season</th>
+        <th>Crop</th>
+        <th>Area</th>
+        <th>Production</th>
+      </tr>
+    </thead>
+    <tbody>
+ 
+    {% for i in a %}
+      <tr>
+        <td>{{i.State_Name}}</td>
+        <td>{{i.District_Name}}</td>
+        <td>{{i.Crop_Year}}</td>
+        <td>{{i.Season}}</td>
+        <td>{{i.Crop}}</td>
+        <td>{{i.Area}}</td>
+        <td>{{i.Production}}</td>
+        
+      </tr>
+    {% endfor %}
+    
+    </tbody>
+  </table>
+</div>
+
+{% endblock content %}

@@ -1,0 +1,407 @@
+
+{% extends 'agro/base.html' %}
+{% load static %}
+{% block style %}
+<style>
+#country{
+    color:brown;
+}
+
+.Hide
+{
+  display:none;
+}
+
+</style>
+{% endblock style %}
+{% block content %}
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function(){
+        // Countries
+
+        
+        
+        var select_crops_un = new Array("Select CROPS","INDIA'S CROPS");
+        $.each(select_crops_un, function (i, item) {
+            $('#select_crops').append($('<option>', {
+                value: i,
+                text : item,
+            }, '</option>' ));
+        });
+
+        // categorys
+        
+        var s_a = new Array();
+        s_a[0]="Select category";
+        s_a[1]="Select category|Cereal|Pulses|Fruits|Beans|Vegetables|spices|fibres|Nuts|oilseeds|Commercial";
+
+    
+
+        // Cities
+        var c_a = new Array();
+        
+        c_a['Cereal']="Rice|Maize|Wheat|Barley|Varagu|Other Cereals & Millets|Ragi|Small millets|Bajra|Jowar|Paddy|Total foodgrain|Jobster";
+        c_a['Pulses']="Moong|Urad|Arhar/Tur|Peas & beans|Masoor|Other Kharif pulses|other misc. pulses|Ricebean (nagadal)|Rajmash Kholar|Lentil|Samai|Blackgram|Korra|Cowpea(Lobia)|Other  Rabi pulses|Other Kharif pulses|Peas & beans (Pulses)|Pulses total|Gram";
+        
+        c_a['Fruits']="Peach|Apple|Litchi|Pear|Plums|Ber|Sapota|Lemon|Pome Granet|Other Citrus Fruit|Water Melon|Jack Fruit|Grapes|Pineapple|Orange|Pome Fruit|Citrus Fruit|Other Fresh Fruits|Mango|Papaya|Coconut|Banana";
+        c_a['Beans']="Bean|Lab-Lab|Moth|Guar seed|Soyabean|Horse-gram";
+        
+        c_a['Vegetables']="Turnip|Peas|Beet Root|Carrot|Yam|Ribed Guard|Ash Gourd |Pump Kin|Redish|Snak Guard|Bottle Gourd|Bitter Gourd|Cucumber|Drum Stick|Cauliflower|Beans & Mutter(Vegetable)|Cabbage|Bhindi|Tomato|Brinjal|Khesari|Sweet potato|Potato|Onion|Tapioca|Colocosia";
+        c_a['spices']="Perilla|Ginger|Cardamom|Black pepper|Dry ginger|Garlic|Coriander|Turmeric|Dry chillies|Cond-spcs other";
+        
+        c_a['fibres']="other fibres|Kapas|Jute & mesta|Jute|Mesta|Cotton(lint)|Sannhamp";
+        c_a['Nuts']="Arcanut (Processed)|Atcanut (Raw)|Cashewnut Processed|Cashewnut Raw|Cashewnut|Arecanut|Groundnut";
+        
+        c_a['oilseeds']="other oilseeds|Safflower|Niger seed|Castor seed|Linseed|Sunflower|Rapeseed &Mustard|Sesamum|Oilseeds total";
+        
+        c_a['Commercial']="Tobacco|Coffee|Tea|Sugarcane|Rubber";
+        
+
+        $('#select_crops').change(function(){
+            var c = $(this).val();
+            var category = s_a[c].split("|");
+            $('#category').empty();
+            $('#crops').empty();
+            if(c==0){
+                $('#category').append($('<option>', {
+                    value: '0',
+                    text: 'Select category',
+                }, '</option>'));
+            }else {
+                $.each(category, function (i, item_category) {
+                    $('#category').append($('<option>', {
+                        value: item_category,
+                        text: item_category,
+                    }, '</option>'));
+                });
+            }
+            $('#crops').append($('<option>', {
+                value: '0',
+                text: 'Select crops',
+            }, '</option>'));
+        });
+
+        $('#category').change(function(){
+            var s = $(this).val();
+            if(s=='Select category'){
+                $('#crops').empty();
+                $('#crops').append($('<option>', {
+                    value: '0',
+                    text: 'Select crops',
+                }, '</option>'));
+            }
+            var crops_arr = c_a[s].split("|");
+            $('#crops').empty();
+
+            $.each(crops_arr, function (j, item_crops) {
+                $('#crops').append($('<option>', {
+                    value: item_crops,
+                    text: item_crops,
+                }, '</option>'));
+            });
+
+
+        });
+        
+    });
+
+
+    $(document).ready(function(){
+        // Countries
+        
+        var country_arr = new Array("Select Country","INDIA");
+        $.each(country_arr, function (i, item) {
+            $('#country').append($('<option>', {
+                value: i,
+                text : item,
+            }, '</option>' ));
+        });
+
+        // States
+        
+        var s_a = new Array();
+        s_a[0]="Select State";
+        s_a[1]="Select State|Andaman and Nicobar Islands|Andhra Pradesh|Arunachal Pradesh|Assam|Bihar|Chandigarh|Chhattisgarh|Dadra and Nagar Haveli|Goa|Gujarat|Haryana|Himachal Pradesh|Jammu and Kashmir|Jharkhand|Karnataka|Kerala|Madhya Pradesh|Maharashtra|Manipur|Meghalaya|Mizoram|Nagaland|Odisha|Puducherry|Punjab|Rajasthan|Sikkim|Tamil Nadu|Telangana|Tripura|Uttar Pradesh|Uttarakhand|West Bengal";
+          
+        // Cities
+        var c_a = new Array();
+        
+        c_a['Andaman and Nicobar Islands']="NICOBARS|NORTH AND MIDDLE ANDAMAN|SOUTH ANDAMANS";
+        c_a['Andhra Pradesh']="ANANTAPUR|CHITTOOR|EAST GODAVARI|GUNTUR|KADAPA|KRISHNA|KURNOOL|PRAKASAM|SPSR NELLORE|SRIKAKULAM|VISAKHAPATANAM|VIZIANAGARAM|WEST GODAVARI";
+        c_a['Arunachal Pradesh']="ANJAW|CHANGLANG|DIBANG VALLEY|EAST KAMENG|EAST SIANG|KURUNG KUMEY|LOHIT|LONGDING|LOWER DIBANG VALLEY|LOWER SUBANSIRI|NAMSAI|PAPUM PARE|TAWANG|TIRAP|UPPER SIANG|UPPER SUBANSIRI|WEST KAMENG|WEST SIANG";
+        c_a['Assam']="BAKSA|BARPETA|BONGAIGAON|CACHAR|CHIRANG|DARRANG|DHEMAJI|DHUBRI|DIBRUGARH|DIMA HASAO|GOALPARA|GOLAGHAT|HAILAKANDI|JORHAT|KAMRUP|KAMRUP METRO|KARBI ANGLONG|KARIMGANJ|KOKRAJHAR|LAKHIMPUR|MARIGAON|NAGAON|NALBARI|SIVASAGAR|SONITPUR|TINSUKIA|UDALGURI";
+        c_a['Bihar']="ARARIA|ARWAL|AURANGABAD|BANKA|BEGUSARAI|BHAGALPUR|BHOJPUR|BUXAR|DARBHANGA|GAYA|GOPALGANJ|JAMUI|JEHANABAD|KAIMUR|(BHABUA)|KATIHAR|KHAGARIA|KISHANGANJ|LAKHISARAI|MADHEPURA|MADHUBANI|MUNGER|MUZAFFARPUR|NALANDA|NAWADA|PASHCHIM|CHAMPARAN|PATNA|PURBI|CHAMPARAN|PURNIA|ROHTAS|SAHARSA|SAMASTIPUR|SARAN|SHEIKHPURA|SHEOHAR|SITAMARHI|SIWAN|SUPAUL|VAISHALI";
+        c_a['Chandigarh']="BALOD|BALODA|BAZAR|BALRAMPUR|BASTAR|BEMETARA|BIJAPUR|BILASPUR|DANTEWADA|DHAMTARI|DURG|GARIYABAND|JANJGIR-CHAMPA|JASHPUR|KABIRDHAM|KANKER|KONDAGAON|KORBA|KOREA|MAHASAMUND|MUNGELI|NARAYANPUR|RAIGARH|RAIPUR|RAJNANDGAON|SUKMA|SURAJPUR|SURGUJA";
+        c_a['Dadra and Nagar Haveli']="SURAJPUR|SURGUJA";
+        c_a['Goa']="NORTH|GOA|SOUTH|GOA";
+        c_a['Gujarat']="AHMADABAD|AMRELI|ANAND|BANAS|KANTHA|BHARUCH|BHAVNAGAR|DANG|DOHAD|GANDHINAGAR|JAMNAGAR|JUNAGADH|KACHCHH|KHEDA|MAHESANA|NARMADA|NAVSARI|PANCH|MAHALS|PATAN|PORBANDAR|RAJKOT|SABAR|KANTHA|SURAT|SURENDRANAGAR|TAPI|VADODARA|VALSAD";
+        c_a['Haryana']="AMBALA|BHIWANI|FARIDABAD|FATEHABAD|GURGAON|HISAR|JHAJJAR|JIND|KAITHAL|KARNAL|KURUKSHETRA|MAHENDRAGARH|MEWAT|PALWAL|PANCHKULA|PANIPAT|REWARI|ROHTAK|SIRSA|SONIPAT|YAMUNANAGAR";
+        c_a['Himachal Pradesh']="BILASPUR|CHAMBA|HAMIRPUR|KANGRA|KINNAUR|KULLU|LAHUL|AND|SPITI|MANDI|SHIMLA|SIRMAUR|SOLAN|UNA";
+        c_a['Jammu and Kashmir']="ANANTNAG|BADGAM|BANDIPORA|BARAMULLA|DODA|GANDERBAL|JAMMU|KARGIL|KATHUA|KISHTWAR|KULGAM|KUPWARA|LEH|LADAKH|POONCH|PULWAMA|RAJAURI|RAMBAN|REASI|SAMBA|SHOPIAN|SRINAGAR|UDHAMPUR";
+        c_a['Jharkhand']="BOKARO|CHATRA|DEOGHAR|DHANBAD|DUMKA|EAST|SINGHBUM|GARHWA|GIRIDIH|GODDA|GUMLA|HAZARIBAGH|JAMTARA|KHUNTI|KODERMA|LATEHAR|LOHARDAGA|PAKUR|PALAMU|RAMGARH|RANCHI|SAHEBGANJ|SARAIKELA|KHARSAWAN|SIMDEGA|WEST|SINGHBHUM";
+        c_a['Karnataka']="BAGALKOT|BANGALORE|RURAL|BELGAUM|BELLARY|BENGALURU|URBAN|BIDAR|BIJAPUR|CHAMARAJANAGAR|CHIKBALLAPUR|CHIKMAGALUR|CHITRADURGA|DAKSHIN|KANNAD|DAVANGERE|DHARWAD|GADAG|GULBARGA|HASSAN|HAVERI|KODAGU|KOLAR|KOPPAL|MANDYA|MYSORE|RAICHUR|RAMANAGARA|SHIMOGA|TUMKUR|UDUPI|UTTAR|KANNAD|YADGIR";
+        c_a['Kerala']="ALAPPUZHA|ERNAKULAM|IDUKKI|KANNUR|KASARAGOD|KOLLAM|KOTTAYAM|KOZHIKODE|MALAPPURAM|PALAKKAD|PATHANAMTHITTA|THIRUVANANTHAPURAM|THRISSUR|WAYANAD";
+        c_a['Madhya Pradesh']="AGAR|MALWA|ALIRAJPUR|ANUPPUR|ASHOKNAGAR|BALAGHAT|BARWANI|BETUL|BHIND|BHOPAL|BURHANPUR|CHHATARPUR|CHHINDWARA|DAMOH|DATIA|DEWAS|DHAR|DINDORI|GUNA|GWALIOR|HARDA|HOSHANGABAD|INDORE|JABALPUR|JHABUA|KATNI|KHANDWA|KHARGONE|MANDLA|MANDSAUR|MORENA|NARSINGHPUR|NEEMUCH|PANNA|RAISEN|RAJGARH|RATLAM|REWA|SAGAR|SATNA|SEHORE|SEONI|SHAHDOL|SHAJAPUR|SHEOPUR|SHIVPURI|SIDHI|SINGRAULI|TIKAMGARH|UJJAIN|UMARIA|VIDISHA";
+        c_a['Maharashtra']="AHMEDNAGAR|AKOLA|AMRAVATI|AURANGABAD|BEED|BHANDARA|BULDHANA|CHANDRAPUR|DHULE|GADCHIROLI|GONDIA|HINGOLI|JALGAON|JALNA|KOLHAPUR|LATUR|MUMBAI|NAGPUR|NANDED|NANDURBAR|NASHIK|OSMANABAD|PALGHAR|PARBHANI|PUNE|RAIGAD|RATNAGIRI|SANGLI|SATARA|SINDHUDURG|SOLAPUR|THANE|WARDHA|WASHIM|YAVATMAL";
+        c_a['Manipur']="BISHNUPUR|CHANDEL|CHURACHANDPUR|IMPHAL|EAST|IMPHAL|WEST|SENAPATI|TAMENGLONG|THOUBAL|UKHRUL";
+        c_a['Meghalaya']="EAST|GARO|HILLS|EAST|JAINTIA|HILLS|EAST|KHASI|HILLS|NORTH|GARO|HILLS|RI|BHOI|SOUTH|GARO|HILLS|SOUTH|WEST|GARO|HILLS|SOUTH|WEST|KHASI|HILLS|WEST|GARO|HILLS|WEST|JAINTIA|HILLS|WEST|KHASI|HILLS";
+        c_a['Mizoram']="AIZAWL|CHAMPHAI|KOLASIB|LAWNGTLAI|LUNGLEI|MAMIT|SAIHA|SERCHHIP";
+        c_a['Nagaland']="DIMAPUR|KIPHIRE|KOHIMA|LONGLENG|MOKOKCHUNG|MON|PEREN|PHEK|TUENSANG|WOKHA|ZUNHEBOTO";
+        c_a['Odisha']="ANUGUL|BALANGIR|BALESHWAR|BARGARH|BHADRAK|BOUDH|CUTTACK|DEOGARH|DHENKANAL|GAJAPATI|GANJAM|JAGATSINGHAPUR|JAJAPUR|JHARSUGUDA|KALAHANDI|KANDHAMAL|KENDRAPARA|KENDUJHAR|KHORDHA|KORAPUT|MALKANGIRI|MAYURBHANJ|NABARANGPUR|NAYAGARH|NUAPADA|PURI|RAYAGADA|SAMBALPUR|SONEPUR|SUNDARGARH";
+        c_a['Puducherry']="KARAIKAL|MAHE|PONDICHERRY|YANAM";
+        c_a['Punjab']="AMRITSAR|BARNALA|BATHINDA|FARIDKOT|FATEHGARH|SAHIB|FAZILKA|FIROZEPUR|GURDASPUR|HOSHIARPUR|JALANDHAR|KAPURTHALA|LUDHIANA|MANSA|MOGA|MUKTSAR|NAWANSHAHR|PATHANKOT|PATIALA|RUPNAGAR|S.A.S|NAGAR|SANGRUR|TARN|TARAN";
+        c_a['Rajasthan']="AJMER|ALWAR|BANSWARA|BARAN|BARMER|BHARATPUR|BHILWARA|BIKANER|BUNDI|CHITTORGARH|CHURU|DAUSA|DHOLPUR|DUNGARPUR|GANGANAGAR|HANUMANGARH|JAIPUR|JAISALMER|JALORE|JHALAWAR|JHUNJHUNU|JODHPUR|KARAULI|KOTA|NAGAUR|PALI|PRATAPGARH|RAJSAMAND|SAWAI|MADHOPUR|SIKAR|SIROHI|TONK|UDAIPUR";
+        c_a['Sikkim']="EAST|DISTRICT|NORTH|DISTRICT|SOUTH|DISTRICT|WEST|DISTRICT";
+        c_a['Tamil Nadu']="ARIYALUR|COIMBATORE|CUDDALORE|DHARMAPURI|DINDIGUL|ERODE|KANCHIPURAM|KANNIYAKUMARI|KARUR|KRISHNAGIRI|MADURAI|NAGAPATTINAM|NAMAKKAL|PERAMBALUR|PUDUKKOTTAI|RAMANATHAPURAM|SALEM|SIVAGANGA|THANJAVUR|THE|NILGIRIS|THENI|THIRUVALLUR|THIRUVARUR|TIRUCHIRAPPALLI|TIRUNELVELI|TIRUPPUR|TIRUVANNAMALAI|TUTICORIN|VELLORE|VILLUPURAM|VIRUDHUNAGAR";
+        c_a['Telangana']="ADILABAD|HYDERABAD|KARIMNAGAR|KHAMMAM|MAHBUBNAGAR|MEDAK|NALGONDA|NIZAMABAD|RANGAREDDI|WARANGAL";
+        c_a['Tripura']="DHALAI|GOMATI|KHOWAI|NORTH|TRIPURA|SEPAHIJALA|SOUTH|TRIPURA|UNAKOTI|WEST|TRIPURA|UNAKOTI|WEST|TRIPURA";
+        c_a['Uttar Pradesh']="AGRA|ALIGARH|ALLAHABAD|AMBEDKAR|NAGAR|AMETHI|AMROHA|AURAIYA|AZAMGARH|BAGHPAT|BAHRAICH|BALLIA|BALRAMPUR|BANDA|BARABANKI|BAREILLY|BASTI|BIJNOR|BUDAUN|BULANDSHAHR|CHANDAULI|CHITRAKOOT|DEORIA|ETAH|ETAWAH|FAIZABAD|FARRUKHABAD|FATEHPUR|FIROZABAD|GAUTAM|BUDDHA|NAGAR|GHAZIABAD|GHAZIPUR|GONDA|GORAKHPUR|HAMIRPUR|HAPUR|HARDOI|HATHRAS|JALAUN|JAUNPUR|JHANSI|KANNAUJ|KANPUR|DEHAT|KANPUR|NAGAR|KASGANJ|KAUSHAMBI|KHERI|KUSHI|NAGAR|LALITPUR|LUCKNOW|MAHARAJGANJ|MAHOBA|MAINPURI|MATHURA|MAU|MEERUT|MIRZAPUR|MORADABAD|MUZAFFARNAGAR|PILIBHIT|PRATAPGARH|RAE|BARELI|RAMPUR|SAHARANPUR|SAMBHAL|SANT|KABEER|NAGAR|SANT|RAVIDAS|NAGAR|SHAHJAHANPUR|SHAMLI|SHRAVASTI|SIDDHARTH|NAGAR|SITAPUR|SONBHADRA|SULTANPUR|UNNAO|VARANASI";
+        c_a['Uttarakhand']="ALMORA|BAGESHWAR|CHAMOLI|CHAMPAWAT|DEHRADUN|HARIDWAR|NAINITAL|PAURI|GARHWAL|PITHORAGARH|RUDRA|PRAYAG|TEHRI|GARHWAL|UDAM|SINGH|NAGAR|UTTAR|KASHI";
+        c_a['West Bengal']="24|PARAGANAS|NORTH|24|PARAGANAS|SOUTH|BANKURA|BARDHAMAN|BIRBHUM|COOCHBEHAR|DARJEELING|DINAJPUR|DAKSHIN|DINAJPUR|UTTAR|HOOGHLY|HOWRAH|JALPAIGURI|MALDAH|MEDINIPUR|EAST|MEDINIPUR|WEST|MURSHIDABAD|NADIA|PURULIA";
+       
+
+        $('#country').change(function(){
+            var c = $(this).val();
+            var state_arr = s_a[c].split("|");
+            $('#state').empty();
+            $('#city').empty();
+            if(c==0){
+                $('#state').append($('<option>', {
+                    value: '0',
+                    text: 'Select State',
+                }, '</option>'));
+            }else {
+                $.each(state_arr, function (i, item_state) {
+                    $('#state').append($('<option>', {
+                        value: item_state,
+                        text: item_state,
+                    }, '</option>'));
+                });
+            }
+            $('#city').append($('<option>', {
+                value: '0',
+                text: 'Select City',
+            }, '</option>'));
+        });
+
+        $('#state').change(function(){
+            var s = $(this).val();
+            if(s=='Select State'){
+                $('#city').empty();
+                $('#city').append($('<option>', {
+                    value: '0',
+                    text: 'Select City',
+                }, '</option>'));
+            }
+            var city_arr = c_a[s].split("|");
+            $('#city').empty();
+
+            $.each(city_arr, function (j, item_city) {
+                $('#city').append($('<option>', {
+                    value: item_city,
+                    text: item_city,
+                }, '</option>'));
+            });
+
+
+        });
+    });
+
+    
+</script>
+<!--<form action="{% url 'iskashow' %}" method="POST"> 
+    {% csrf_token %}
+    <label for="country">Country</label>
+    <select name="country" id="country"></select> <br>
+
+    <label for="state">State</label>
+    <select name="state" id="state"></select> <br>
+
+    <label for="city">City</label>
+    <select name="city" id="city"></select><br>
+
+    <label for="select_crops">select_crops</label>
+    <select name="select_crops" id="select_crops"></select> <br>
+
+    <label for="category">Category</label>
+    <select name="category" id="category"></select> <br>
+
+    <label for="crops">Crops</label>
+    <select name="crops" id="crops"></select><br>
+    
+    <label for="year">Year</label>
+    <input type="number" id="year" name="year" min="1999" max="2015"><br>
+
+    <label for="area">Area</label>
+    <input type="number" id="area" name="area" ><br>
+
+    <label for="season_ne">Season</label>
+    <select name='season_ne' id="season_ne" class="mdb-select md-form" searchable="Search here..">
+            {% for choice in cc %}
+                <option value="{{ choice }}">{{ choice }}</option>
+            {% endfor %}
+        </select><br>
+    <input type="submit" value="Submit">
+</form>-->
+<div class="jumbotron text-center" style="margin-bottom:0;margin-top:30px">
+    <h1 class="blinking">&#129381; &#127834; &#129364; CROP  STAT'S PREDICTION &#127817; &#127821; &#127822;</h1>
+    <marquee behavior="alternate">
+      <div class="spinner-border text-muted"><div class="spinner-border text-success"><div class="spinner-border text-dark"></div></div></div>
+      <div class="spinner-border text-primary"><div class="spinner-border text-light"><div class="spinner-border text-info"></div></div></div>
+      <div class="spinner-border text-warning"><div class="spinner-border text-danger"><div class="spinner-border text-secondary"></div></div></div>
+      <span class="badge badge-info">***</span> PREDICTION'S MAY TAKE TIME DUE TO LARGE DATASET SO BE PATIENT  &#9203;</span>
+      <span class="badge badge-info">***</span>
+       <div class="spinner-border text-warning"><div class="spinner-border text-danger"><div class="spinner-border text-secondary"></div></div></div>
+    <div class="spinner-border text-primary"><div class="spinner-border text-light"><div class="spinner-border text-info"></div></div></div>
+    <div class="spinner-border text-muted"><div class="spinner-border text-success"><div class="spinner-border text-dark"></div></div></div>
+  </marquee>                   
+  </div>
+<script>
+window.onload = pre_loader;
+
+function pre_loader() {
+
+    javascript:document.getElementById('myText').style.visibility='hidden';
+
+    javascript:document.getElementById('myText').style.opacity=0;
+
+}
+function myFunction() {
+  document.getElementById('myText').style.visibility='visible';
+  document.getElementById('myText').style.opacity=1;
+}
+
+
+
+
+
+</script>
+<form action="{% url 'iskashow' %}" method="POST" > 
+    {% csrf_token %}
+<div style="overflow-x:auto;">
+<table class="table table-striped table-dark  table-hover table-bordered">
+        <thead>
+          <tr>
+            <th>Parameters</th>
+            <th>Values</th>
+            <th>Examples</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td for="country">Country  </td>
+            <td><select name="country" id="country" required></select></td>
+            
+            <td>Should be INDIA</td>
+          </tr>      
+          <tr>
+            <td  for="state">State </td>
+            <td> <select name="state" id="state" required></select></td>
+            <td>Should be a sate from dropdown</td>
+          </tr>
+          <tr>
+            <td for="city">City  </td>
+            <td>
+              <select name="city" id="city" required></select></td>
+            <td>Should be a city from that state</td>
+          </tr>
+          <tr>
+            <td for="select_crops">Select_crops  </td>
+            <td>
+              <select name="select_crops" id="select_crops" required></select></td>
+            <td>Should be a Select Crops</td>
+          </tr>
+          <tr>
+            <td for="category">Category  </td>
+            <td>
+              <select name="category" id="category" required></select></td>
+            <td>Should be a crops category from dropdown</td>
+          </tr>
+          <tr>
+            <td for="crops">Crops  </td>
+            <td>
+              <select name="crops" id="crops" required></select></td>
+            <td>Should be respective crops from that category</td>
+          </tr>
+          <tr>
+            <td for="year">Year  </td>
+            <td>
+              <input type="number" id="year" name="year" min="1999" max="2015"></td>
+            <td>Should be a year between 1999-2015</td>
+          </tr>
+          <tr>
+            <td for="area">AREA  </td>
+            <td>
+              <input type="number" id="area" name="area"></td>
+            <td>Should be a between 2000 and 300000</td>
+          </tr>
+          <tr>
+            <td for="season_ne">Season  </td>
+            <td>
+              <select name='season_ne' id="season_ne" class="mdb-select md-form" searchable="Search here..">
+                    {% for choice in cc %}
+                        <option value="{{ choice }}">{{ choice }}</option>
+                    {% endfor %}
+                </select></td>
+            <td>Should be a season from dropdwon</td>
+          </tr>
+          
+        </tbody>
+      </table>
+      </div>
+      <center><input type="submit" value='submit' class="btn btn-outline-success btn-lg" onclick="myFunction()"></center>
+     
+      
+
+</form>
+{{a|safe}}
+
+<div id="myText",name="myText">
+<div class="spinner-grow text-primary" role="status">
+  <span class="sr-only">Loading...</span>
+</div>
+<div class="spinner-grow text-secondary" role="status">
+  <span class="sr-only">Loading...</span>
+</div>
+<div class="spinner-grow text-success" role="status">
+  <span class="sr-only">Loading...</span>
+</div>
+<div class="spinner-grow text-danger" role="status">
+  <span class="sr-only">Loading...</span>
+</div>
+<div class="spinner-grow text-warning" role="status">
+  <span class="sr-only">Loading...</span>
+</div>
+<div class="spinner-grow text-info" role="status">
+  <span class="sr-only">Loading...</span>
+</div>
+<div class="spinner-grow text-light" role="status">
+  <span class="sr-only">Loading...</span>
+</div>
+<div class="spinner-grow text-dark" role="status">
+  <span class="sr-only">Loading...</span>
+</div>
+<div class="spinner-grow text-primary" role="status">
+  <span class="sr-only">Loading...</span>
+</div>
+<div class="spinner-grow text-secondary" role="status">
+  <span class="sr-only">Loading...</span>
+</div>
+<div class="spinner-grow text-success" role="status">
+  <span class="sr-only">Loading...</span>
+</div>
+<div class="spinner-grow text-danger" role="status">
+  <span class="sr-only">Loading...</span>
+</div>
+<div class="spinner-grow text-warning" role="status">
+  <span class="sr-only">Loading...</span>
+</div>
+<div class="spinner-grow text-info" role="status">
+  <span class="sr-only">Loading...</span>
+</div>
+</div>
+
+
+
+{% endblock content %}

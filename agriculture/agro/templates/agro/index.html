@@ -1,0 +1,63 @@
+
+
+
+{% extends 'agro/base.html' %}
+{% load static %}
+{% block content %}
+<style>
+.bg{
+   
+
+ 
+  
+  background-repeat: no-repeat;
+  
+  background-size: 100vw 150vh;
+}
+.ho{
+    background: rgb(108 80 80 / 50%);
+    box-shadow: 10px 10px 5px rgb(53 54 53 / 80%);
+    height: 480px;
+     width: 70%; 
+     margin-top: 20px;
+     margin-left: 20px;
+}
+
+@media screen and (min-width: 601px) {
+  #myne{
+    
+    font-size: 2vw;
+    word-break: keep-all !important;
+}
+#mm{
+    font-size:1vw;
+    word-break: keep-all !important;
+}
+}
+
+/* If the screen size is 600px wide or less, set the font-size of <div> to 30px */
+@media screen and (max-width: 600px) {
+  #myne{
+    
+    font-size: 4vw;
+    word-break: keep-all !important;
+}
+#mm{
+    font-size:2.2vw;
+    word-break: keep-all !important;
+}
+}
+
+
+</style>
+<body id="bg" class="bg" style="background-image: url('{% static "agro/images/farming.jpg"%}')";>
+<div class="ho">
+<p id="mm"><b>Agriculture in India is livelihood for a majority of the population and can never be underestimated.</b></p>
+
+<p id="mm"><b>Although its contribution in the gross domestic product (GDP) has reduced to less than 20 per cent and contribution of other sectors increased at a faster rate, agricultural production has grown. This has made us self-sufficient and taken us from being a begging bowl for food after independence to a net exporter of agriculture and allied products.</b></p>
+<p id="mm"><b>India is the second largest producer of wheat and rice, the world's major food staples.</p>
+
+<p id="mm"><b>India is currently the world's second largest producer of several dry fruits, agriculture-based textile raw materials, roots and tuber crops, pulses, farmed fish, eggs, coconut, sugarcane and numerous vegetables. India is ranked under the world's five largest producers of over 80% of agricultural produce items, including many cash crops such as coffee and cotton, in 2010.India is one of the world's five largest producers of livestock and poultry meat, with one of the fastest growth rates, as of 2011.</b></p>
+<p id ="myne"><b>In this project the data is used is from Kaggle.com and i.e crop-production-in-india. This project predict the Production based on certain inputs provided.This project is made with simplicity from the view of user .It will also include more data in future for more accurate result.</b></p>
+</div>
+{% endblock content %}

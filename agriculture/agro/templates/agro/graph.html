@@ -1,0 +1,82 @@
+
+{% extends 'agro/base.html' %}
+{% load static %}
+{% block content %}
+<div class="jumbotron text-center" style="margin-bottom:0;margin-top:30px">
+    <h1 class="blinking">DIFFERENT GRAPH'S ACCORDING TO CROP-SELECTED</h1>
+    <marquee behavior="alternate">
+      <div class="spinner-border text-muted"><div class="spinner-border text-success"><div class="spinner-border text-dark"></div></div></div>
+      <div class="spinner-border text-primary"><div class="spinner-border text-light"><div class="spinner-border text-info"></div></div></div>
+      <div class="spinner-border text-warning"><div class="spinner-border text-danger"><div class="spinner-border text-secondary"></div></div></div>
+      <span class="badge badge-info">***</span> Some Graph May be very Comapct Or takes time to load due to large Dataset &#9203;</span>
+      <span class="badge badge-info">***</span>
+       <div class="spinner-border text-warning"><div class="spinner-border text-danger"><div class="spinner-border text-secondary"></div></div></div>
+    <div class="spinner-border text-primary"><div class="spinner-border text-light"><div class="spinner-border text-info"></div></div></div>
+    <div class="spinner-border text-muted"><div class="spinner-border text-success"><div class="spinner-border text-dark"></div></div></div>
+  </marquee>                   
+  </div>
+<form method="POST" action="{% url 'iskagraph' %}" >
+    {% csrf_token %}
+
+<div style="overflow-x:auto;">
+<table class="table table-striped table-dark  table-hover table-bordered">
+        <thead>
+          <tr>
+            <th>Parameters</th>
+            <th>Values</th>
+            <th>Examples</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td for="drop1">GRAPH-CATEGORY  </td>
+            <td><div class="container my-4 " >
+                    <select name='drop1' id="drop1" class="mdb-select md-form" searchable="Search here..">
+                    <option value="LINEPLOT">LINEPLOT</option>
+                    <option value="HISTOGRAM">HISTOGRAM</option>
+                    <option value="SCATTER PLOTTING">SCATTER PLOTTING</option>      
+                    <option value="BARGRAPH">BARGRAPH</option>
+                    
+                    <option value="PIE-CHART">PIE-CHART</option>
+                    <option value="HEATMAP">HEATMAP</option>
+                    </select>
+                </div></td>
+            
+
+            <td>Select Graph from Dropdown </td>
+          </tr>      
+          <tr>
+            <td  for="drop16">State </td>
+            <td>
+            
+                <div>
+                <select name='drop16' id="drop1" class="mdb-select md-form" searchable="Search here..">
+                    {% for choice in a %}
+                        <option value="{{ choice }}">{{ choice }}</option>
+                    {% endfor %}
+                </select>
+        
+                </div>
+            </td>
+            <td>Should be a state from dropdown</td>
+          </tr>
+          <tr>
+            <td for="drop162">Crop  </td>
+            <td>
+              <div>
+                <select name='drop162' id="drop1" class="mdb-select md-form" searchable="Search here..">
+                    {% for choice in b %}
+                        <option value="{{ choice }}">{{ choice }}</option>
+                    {% endfor %}
+                    </select>
+            </div></td>
+
+
+            <td>Should be a city from that state</td>
+          </tr>
+    </table>
+    </div>
+  <center><input type="submit" value='submit' class="btn btn-outline-success btn-lg" onclick="myFunction()"></center>
+</form>
+  
+{% endblock content %}

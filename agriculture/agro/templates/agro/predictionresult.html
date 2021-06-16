@@ -1,0 +1,63 @@
+{% extends 'agro/base.html' %}
+{% load static %}
+{% block content %}
+<style>
+.floatLeft { float: left; }
+
+.floatRight { float: right; }
+.logoHeader {
+    height: 120px;
+    vertical-align: middle
+    vertical-align: middle;
+    text-align: center; 
+}
+</style>
+<div style="overflow-x:auto;">
+<table class="table table-striped table-dark  table-hover table-bordered">
+        <thead>
+          <tr>
+            <th>ACCURACY</th>
+            <th>MACHINE-LEARNING MODEL</th>
+            <th>PREDICTION OF INPUT GIVEN</th>
+          </tr>
+        </thead>
+        <tbody>
+{% for fm in a %}
+    
+     <tr>
+            <td >{{fm.0}} </td>
+            <td >{{fm.1}} </td>
+            <td >{{fm.2}} </td>
+    </tr>
+    
+    <br>
+
+{% endfor %}
+</tbody>
+</table>
+<br>
+
+
+
+<img src="{% static 'agro/images/giphy.gif' %}"   width="250" height="250" class="floatLeft" alt="bye">
+<img src="{% static 'agro/images/giphy (1).gif' %}"   width="250" height="250" class="floatRight" alt="bye">
+<h1 class="logoHeader">BEST PREDICTION( MOST ACCURATE )</h1>
+
+<table class="table table-striped  table-hover table-bordered center">
+        <thead>
+        <tr>
+            <th>ACCURACY</th>
+            <th>MACHINE-LEARNING MODEL</th>
+            <th>PREDICTION OF INPUT GIVEN</th>
+          </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>{{ax1}}</td>
+            <td>{{ax2}}</td>
+            <td>{{ax3}}</td>
+        <tr>
+        </tbody>
+        </table>
+        </div>
+{% endblock content %}
