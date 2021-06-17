@@ -13,7 +13,7 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 from pathlib import Path
 import os
 
-import django_heroku
+
 import dj_database_url
 from decouple import config
 
@@ -137,4 +137,3 @@ STATICFILES_DIRS=[
 
 MEDIA_URL= '/media/'
 MEDIA_ROOT=BASE_DIR / 'media'
-django_heroku.settings(locals())
