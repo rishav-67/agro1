@@ -11,4 +11,4 @@ urlpatterns = [
     path('graphscommon/',views.graphcommon,name="iskagraphco"),
     path('datas/',views.headgo,name="iskahead")
            
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
