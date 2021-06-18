@@ -1,1 +1,1 @@
-web: gunicorn agriculture:app
+web: gunicorn agriculture.wsgi
