@@ -30,7 +30,7 @@ SECRET_KEY = '%%0_bww0#iuo6%p9!4s6p#$xbb-%myk7s+c9qr=p6(=zsjf%fh'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['*','127.0.0.1','agro1-predict.herokuapp.com']
+ALLOWED_HOSTS = ['*','127.0.0.1','agro1-predict.herokuapp.com','agro2-predict.herokuapp.com']
 
 
 # Application definition
