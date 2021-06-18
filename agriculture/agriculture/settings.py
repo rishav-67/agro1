@@ -12,7 +12,7 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 
 from pathlib import Path
 import os
-import django_heroku
+
 
 import dj_database_url
 from decouple import config
@@ -28,7 +28,7 @@ print(BASE_DIR)
 SECRET_KEY = '%%0_bww0#iuo6%p9!4s6p#$xbb-%myk7s+c9qr=p6(=zsjf%fh'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['*','127.0.0.1','agro1-predict.herokuapp.com']
 
@@ -137,4 +137,3 @@ STATICFILES_DIRS=[
 
 MEDIA_URL= '/media/'
 MEDIA_ROOT=BASE_DIR / 'media'
-django_heroku.settings(locals())
